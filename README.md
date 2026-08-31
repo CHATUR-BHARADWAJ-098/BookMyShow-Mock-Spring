@@ -19,7 +19,7 @@ Open `http://localhost:8080/`.
 
 ## Build a deployable image
 
-Production requires an external database. Set `DB_URL`, `DB_USERNAME`, and `DB_PASSWORD` in the runtime environment.
+The hosted demo profile uses a file-backed H2 database so it can start without a separate database service. For durable production data, use the `prod` profile with a managed MySQL database.
 
 ```powershell
 docker build -t cinebook .
@@ -37,10 +37,9 @@ The production profile uses `ddl-auto=validate`, disables the H2 console, enable
 1. Open [Render](https://render.com/) and choose **New > Blueprint**.
 2. Connect the `CHATUR-BHARADWAJ-098/BookMyShow-Mock-Spring` repository.
 3. Render will detect `render.yaml` and create the `cinebook` Docker web service.
-4. Enter a reachable MySQL-compatible `DB_URL`, `DB_USERNAME`, and `DB_PASSWORD` when prompted.
-5. Deploy the service and use the generated `onrender.com` URL.
+4. Deploy the service and use the generated `onrender.com` URL. The Blueprint uses the `demo` profile and does not require database variables.
 
-Render does not provide a native MySQL service. Use an external managed MySQL provider and create the CineBook schema before deploying because the production profile validates, rather than modifies, the schema.
+The demo database is file-backed and can be reset when the free service is redeployed or restarted. For permanent bookings, change `SPRING_PROFILES_ACTIVE` to `prod`, add `DB_URL`, `DB_USERNAME`, and `DB_PASSWORD`, and use a managed MySQL provider.
 
 ## Use MySQL running on your machine
 
