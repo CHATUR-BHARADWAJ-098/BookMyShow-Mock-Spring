@@ -10,4 +10,6 @@ import java.util.UUID;
 
 public interface BookingRepository extends JpaRepository<Booking, UUID> {
     List<Booking> findByScreenIdAndShowTimeAndBookingStatusIn(UUID screenId, LocalDateTime showTime, Collection<BookingStatus> statuses);
+
+    List<Booking> findByShowTimeBetweenOrderByShowTimeAsc(LocalDateTime start, LocalDateTime end);
 }

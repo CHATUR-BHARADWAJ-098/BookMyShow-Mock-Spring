@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>BookMyShow Style</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="topbar">
+    <div class="container nav">
+        <div class="brand">BookMyShow</div>
+        <div class="city-box">
+            <span>City</span>
+            <select>
+                <option th:each="region : ${regions}" th:value="${region.id}" th:text="${region.name}"></option>
+            </select>
+        </div>
+        <div class="search-box">Search for Movies, Events, Plays, Sports</div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="hero">
+        <h1>Book movie tickets in minutes</h1>
+        <p>Enjoy the latest blockbusters with premium seats and easy booking.</p>
+    </div>
+
+    <div class="section-header">
+        <h2>Now Showing</h2>
+    </div>
+
+    <div class="movie-grid">
+        <div class="movie-card" th:each="movie : ${movies}">
+            <img th:src="${movie.posterUrl}" alt="movie poster" />
+            <div class="movie-body">
+                <h3 th:text="${movie.title}"></h3>
+                <p th:text="${movie.genre} + ' • ' + ${movie.language}"></p>
+                <a th:href="@{'/movie/' + ${movie.id}}" class="btn">Book Now</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

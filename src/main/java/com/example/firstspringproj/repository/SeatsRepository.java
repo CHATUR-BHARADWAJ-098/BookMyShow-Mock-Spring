@@ -8,4 +8,5 @@ import java.util.UUID;
 
 public interface SeatsRepository extends JpaRepository<Seats, UUID> {
     List<Seats> findByIdInAndScreenId(Collection<UUID> ids, UUID screenId);
+    List<Seats> findByScreenId(UUID screenId);
 }

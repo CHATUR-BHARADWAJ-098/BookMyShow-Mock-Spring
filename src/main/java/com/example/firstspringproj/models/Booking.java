@@ -21,7 +21,8 @@ import java.util.Set;
 @NoArgsConstructor
 public class Booking extends Basemodel {
     private String customerName;
-    private String customerEmail;
+    private String customerMobile;
+    private String movieTitle;
     private LocalDateTime showTime;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Screen screen;
@@ -30,4 +31,7 @@ public class Booking extends Basemodel {
     private Set<Seats> seats = new HashSet<>();
     @Enumerated(EnumType.STRING)
     private BookingStatus bookingStatus;
+    private String bookingId;
+    private double totalAmount;
+    private String qrCodeText;
 }

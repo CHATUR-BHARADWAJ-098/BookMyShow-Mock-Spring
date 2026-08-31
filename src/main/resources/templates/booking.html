@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Tickets</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container booking-layout">
+    <div class="booking-left">
+        <h2 th:text="${movie.title}"></h2>
+        <div class="show-list">
+            <div class="show-item" th:each="show : ${shows}">
+                <div>
+                    <strong th:text="${show.screen.theatre.name}"></strong>
+                    <p th:text="${show.screen.name} + ' • ' + ${show.formatType}"></p>
+                </div>
+                <div>
+                    <span th:text="${show.showDate}"></span>
+                    <span th:text="${show.showTime}"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="food-section">
+            <h3>Add Food & Beverages</h3>
+            <div class="food-item" th:each="food : ${foodItems}">
+                <span th:text="${food.name}"></span>
+                <span th:text="${food.price}"></span>
+            </div>
+        </div>
+
+        <div class="coupon-box">
+            <h3>Apply Coupon</h3>
+            <input type="text" placeholder="Enter coupon code" />
+        </div>
+    </div>
+
+    <aside class="booking-right">
+        <h3>Customer Details</h3>
+        <form>
+            <label>Name</label>
+            <input type="text" name="customerName" placeholder="Enter your name" required>
+
+            <label>Mobile Number</label>
+            <input type="text" name="customerMobile" placeholder="10-digit mobile number" required>
+
+            <button type="submit" class="btn">Confirm Booking</button>
+        </form>
+    </aside>
+</div>
+</body>
+</html>

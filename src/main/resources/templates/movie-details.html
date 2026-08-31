@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${movie.title}"></title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container detail-layout">
+    <div class="poster-panel">
+        <img th:src="${movie.posterUrl}" alt="movie poster" />
+    </div>
+    <div class="detail-panel">
+        <h1 th:text="${movie.title}"></h1>
+        <p th:text="${movie.genre} + ' • ' + ${movie.language} + ' • ' + ${movie.duration}"></p>
+        <p th:text="${movie.description}"></p>
+        <div class="tag-list">
+            <span th:text="${movie.certificate}"></span>
+            <span th:text="${movie.rating} + '/10'"> </span>
+        </div>
+
+        <form th:action="@{/booking}" method="get">
+            <input type="hidden" name="movieId" th:value="${movie.id}" />
+            <label>Choose City</label>
+            <select name="regionId">
+                <option th:each="region : ${regions}" th:value="${region.id}" th:text="${region.name}"></option>
+            </select>
+            <button type="submit" class="btn">Continue</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
