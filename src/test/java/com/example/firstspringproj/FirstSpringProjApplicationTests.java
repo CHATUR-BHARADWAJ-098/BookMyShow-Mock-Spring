@@ -47,7 +47,7 @@ class FirstSpringProjApplicationTests {
 
         var payload = Map.of(
                 "customerName", "Test User",
-                "customerEmail", "test@example.com",
+                "customerMobile", "9876543210",
                 "movieTitle", "Dune: Part Two",
                 "screenId", screen.getId().toString(),
                 "showTime", "2099-12-31T19:30:00",

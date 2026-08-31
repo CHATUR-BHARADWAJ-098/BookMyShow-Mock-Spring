@@ -105,9 +105,13 @@ public class BookingService {
         booking.setShowTime(request.showTime());
         booking.setSeats(new HashSet<>(requestedSeats));
         booking.setBookingStatus(BookingStatus.CONFIRMED);
-        return bookingRepository.save(booking);
+        Booking savedBooking = bookingRepository.save(booking);
+        savedBooking.getScreen().getTheatre().getRegion().getName();
+        savedBooking.getSeats().forEach(seat -> seat.getSeatNumber());
+        return savedBooking;
     }
 
+    @Transactional
     public List<BookingResponse> getBookingsForDate(LocalDate date) {
         LocalDateTime start = date.atStartOfDay();
         LocalDateTime end = date.plusDays(1).atStartOfDay();
