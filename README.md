@@ -57,7 +57,7 @@ ngrok tcp 3306
 4. In Render, set `DB_URL` to:
 
 ```text
-jdbc:mysql://0.tcp.ngrok.io:15432/cinebook?sslMode=REQUIRED&serverTimezone=UTC
+jdbc:mysql://0.tcp.ngrok.io:15432/cinebook?sslMode=DISABLED&allowPublicKeyRetrieval=true&serverTimezone=UTC
 ```
 
 5. Set `DB_USERNAME` and `DB_PASSWORD` to the dedicated MySQL user credentials, then redeploy.
