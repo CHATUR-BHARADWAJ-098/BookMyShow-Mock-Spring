@@ -41,3 +41,25 @@ The production profile uses `ddl-auto=validate`, disables the H2 console, enable
 5. Deploy the service and use the generated `onrender.com` URL.
 
 Render does not provide a native MySQL service. Use an external managed MySQL provider and create the CineBook schema before deploying because the production profile validates, rather than modifies, the schema.
+
+## Use MySQL running on your machine
+
+Render cannot connect to `localhost` directly. For a temporary demo, expose only the MySQL TCP port through an authenticated tunnel and keep your computer online:
+
+1. Install [ngrok](https://ngrok.com/download), authenticate it, and start a TCP tunnel:
+
+```powershell
+ngrok tcp 3306
+```
+
+2. Restrict your MySQL user to the CineBook database and use a dedicated password. Do not expose the MySQL root user.
+3. Copy the ngrok forwarding address, for example `0.tcp.ngrok.io:15432`.
+4. In Render, set `DB_URL` to:
+
+```text
+jdbc:mysql://0.tcp.ngrok.io:15432/cinebook?sslMode=REQUIRED&serverTimezone=UTC
+```
+
+5. Set `DB_USERNAME` and `DB_PASSWORD` to the dedicated MySQL user credentials, then redeploy.
+
+This is suitable for a short-lived demo only. The tunnel endpoint can change, your machine must remain powered on, and exposing a personal database increases risk. For a real deployment, move the database to a managed MySQL provider and rotate any credentials used during testing.
